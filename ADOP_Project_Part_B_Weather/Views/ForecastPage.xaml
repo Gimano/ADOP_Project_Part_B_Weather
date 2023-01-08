@@ -7,18 +7,28 @@
             <Button Text="Refresh" Clicked="Button_Clicked" />
 
             <!-- Your XAML code to present the weather data in a ListView-->
-            <!-- 
             <ListView x:Name="GroupedForecast" IsGroupingEnabled="true" HasUnevenRows="true">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
+                        <ViewCell Height="40">
+                            <Label Text="{Binding Key, StringFormat='dd mmmm yyyy'}"></Label>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Icon}"/>
+                                <StackLayout Orientation="Vertical">
+                                    <Label Text="{Binding Description}"/>
+                                    <Label Text="{Binding Temperature, StringFormat='Temp: {0}'}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            -->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
