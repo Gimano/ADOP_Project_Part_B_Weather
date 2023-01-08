@@ -10,19 +10,23 @@
             <ListView x:Name="GroupedForecast" IsGroupingEnabled="true" HasUnevenRows="true">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
-                        <ViewCell Height="40">
-                            <Label FontSize="20" Text="{Binding Key, StringFormat='dd mmmm yyyy'}"></Label>
+                        <ViewCell Height="60">
+                            <Label FontSize="20" Text="{Binding Key, StringFormat='{0:D}'}" Padding="20" TextColor="DarkBlue"/>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal">
+                            <StackLayout Orientation="Horizontal" Padding="5">
                                 <Image Source="{Binding Icon}"/>
-                                <StackLayout Orientation="Vertical">
+                                <StackLayout Orientation="Vertical" >
+                                    <Label Text="{Binding DateTime, StringFormat='{0:t}'}"/>
                                     <Label Text="{Binding Description}"/>
-                                    <Label Text="{Binding Temperature, StringFormat='Temp: {0}'}" />
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="{Binding Temperature, StringFormat='Temperature: {0} C'}" WidthRequest="150"/>
+                                        <Label Text="{Binding WindSpeed, StringFormat='Windspeed: {0} m/s'}"/>
+                                    </StackLayout>
                                 </StackLayout>
                             </StackLayout>
                         </ViewCell>

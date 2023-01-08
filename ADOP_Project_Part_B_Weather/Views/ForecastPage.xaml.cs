@@ -49,8 +49,8 @@ namespace ADOP_Project_Part_B_Weather.Views
 
             //Here Group your forecast and bind it to your
             //ListView ItemSource
-            groupedforecast = new GroupedForecast() {City = city.Name, Items = forecast.Items.GroupBy(o => o.DateTime) };
-            GroupedForecast.ItemsSource= groupedforecast.Items;
+            groupedforecast = new GroupedForecast() {City = city.Name, Items = forecast.Items.GroupBy(o => o.DateTime.Date) };
+            GroupedForecast.ItemsSource = groupedforecast.Items;
         }
     }
 }
