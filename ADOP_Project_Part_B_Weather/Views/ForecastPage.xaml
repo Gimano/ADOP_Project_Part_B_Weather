@@ -11,7 +11,7 @@
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <ViewCell Height="40">
-                            <Label Text="{Binding Key, StringFormat='dd mmmm yyyy'}"></Label>
+                            <Label FontSize="20" Text="{Binding Key, StringFormat='dd mmmm yyyy'}"></Label>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
