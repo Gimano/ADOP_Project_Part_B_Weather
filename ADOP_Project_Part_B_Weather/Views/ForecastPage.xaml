@@ -18,9 +18,9 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Orientation="Horizontal" Padding="5">
+                            <StackLayout Orientation="Horizontal" Padding="5" Spacing="10">
                                 <Image Source="{Binding Icon}"/>
-                                <StackLayout Orientation="Vertical" >
+                                <StackLayout Orientation="Vertical">
                                     <Label Text="{Binding DateTime, StringFormat='{0:t}'}"/>
                                     <Label Text="{Binding Description}"/>
                                     <StackLayout Orientation="Horizontal">

@@ -21,11 +21,6 @@ namespace ADOP_Project_Part_B_Weather.Services
         //Your API Key
         readonly string apiKey = "a1720388be09d3ae9a7780925427f106";
 
-        public event EventHandler<string> WeatherForecastAvailable;
-        protected virtual void OnWeatherForecastAvailable(string message)
-        {
-            WeatherForecastAvailable?.Invoke(this, message);
-        }
         public async Task<Forecast> GetForecastAsync(string City)
         {
             Forecast forecast = null;
@@ -39,11 +34,8 @@ namespace ADOP_Project_Part_B_Weather.Services
 
                 forecast = await ReadWebApiAsync(uri);
                 cachedCityForecasts[key] = forecast;
-                OnWeatherForecastAvailable($"New Weather forecast for {City}");
                 return forecast;
             }
-
-            OnWeatherForecastAvailable($"Cached Weather forecast for {City}");
 
             return forecast;
 
@@ -61,11 +53,9 @@ namespace ADOP_Project_Part_B_Weather.Services
 
                 forecast = await ReadWebApiAsync(uri);
                 cachedGeoForecasts[key] = forecast;
-                OnWeatherForecastAvailable($"New Weather forecast for ({latitude}, {longitude})");
                 return forecast;
             }
 
-            OnWeatherForecastAvailable($"Cached Weather forecast for ({latitude}, {longitude})");
             return forecast;
         }
         private async Task<Forecast> ReadWebApiAsync(string uri)
@@ -74,7 +64,6 @@ namespace ADOP_Project_Part_B_Weather.Services
             response.EnsureSuccessStatusCode();
             WeatherApiData wd = await response.Content.ReadFromJsonAsync<WeatherApiData>();
 
-            /*
             var forecast = new Forecast()
             {
                 City = wd.city.name,
@@ -86,18 +75,6 @@ namespace ADOP_Project_Part_B_Weather.Services
                     Description = wdle.weather.First().description,
                     Icon = $"https://openweathermap.org/img/w/{wdle.weather.First().icon}.png"
                 }).ToList()
-            };*/
-            var forecast = new Forecast() 
-            { 
-                City = wd.city.name, 
-                Items = wd.list.Select(o => new ForecastItem 
-                { 
-                    DateTime = UnixTimeStampToDateTime(o.dt), 
-                    Temperature = o.main.temp, 
-                    Description = o.weather.Select(o => o.description).Single(), 
-                    WindSpeed = o.wind.speed, 
-                    Icon = $"https://openweathermap.org/img/w/{o.weather.Select(o => o.icon).Single()}.png"
-                }).ToList() 
             };
             return forecast;
         }
